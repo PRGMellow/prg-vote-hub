@@ -81,9 +81,7 @@ h1 {
 }
 
 /* BUTTONS */
-.main-btn,
-.group-btn,
-.action-btn {
+.main-btn, .group-btn, .action-btn {
   width: 100%;
   padding: 13px;
   margin-bottom: 10px;
@@ -111,13 +109,11 @@ h1 {
 
 .main-btn {
   background: linear-gradient(90deg, #a31212, #ff2f2f);
-  letter-spacing: 0.12em;
 }
 
 .group-btn {
   background: linear-gradient(90deg, #5c1010, #b32020);
   font-size: 12px;
-  letter-spacing: 0.1em;
 }
 
 .action-btn {
@@ -130,7 +126,7 @@ h1 {
   display: block;
   padding: 11px;
   margin-top: 6px;
-  background: linear-gradient(180deg, #1a1a1a, #111);
+  background: #1a1a1a;
   border-radius: 10px;
   text-align: center;
   text-decoration: none;
@@ -146,61 +142,49 @@ h1 {
 }
 
 /* BOXES */
-.note,
-.warning,
-.status,
-.helper-box {
+.note, .warning, .status, .helper-box {
   margin-top: 12px;
   padding: 12px;
   border-radius: 10px;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .note {
-  background: linear-gradient(180deg, rgba(22,22,22,0.98), rgba(12,12,12,0.98));
-  border: 1px solid rgba(255, 60, 60, 0.14);
+  background: linear-gradient(180deg, rgba(18,18,18,0.98), rgba(10,10,10,0.98));
+  border: 1px solid rgba(255,255,255,0.05);
   text-align: left;
+  color: #e7e7e7;
 }
 
-.note-section {
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+.note p {
+  margin: 0 0 10px;
 }
 
-.note-section:first-child {
-  padding-top: 0;
+.note p:last-child {
+  margin-bottom: 0;
 }
 
-.note-section:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.note-title {
-  display: block;
-  font-weight: 800;
-  color: #ffb3b3;
-  margin-bottom: 3px;
-  letter-spacing: 0.02em;
+.note-highlight {
+  padding: 8px 10px;
+  margin: 10px 0;
+  border-left: 3px solid rgba(255, 90, 90, 0.7);
+  background: rgba(255, 30, 30, 0.07);
+  border-radius: 6px;
+  color: #ffd0d0;
 }
 
 .warning {
-  background: linear-gradient(180deg, #2a1400, #1d0f00);
+  background: #2a1400;
   color: #ffd9a3;
-  border: 1px solid rgba(255, 174, 0, 0.2);
-  text-align: left;
 }
 
 .status {
   background: #111;
-  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .helper-box {
   background: #161616;
-  border: 1px solid rgba(255,255,255,0.06);
-  text-align: left;
 }
 
 .hidden { display: none; }
@@ -254,33 +238,19 @@ OPEN ALL VOTES
 </button>
 
 <div class="note">
-  <div class="note-section">
-    <span class="note-title">Quick Access</span>
-    Opens every PRG vote page.
+  <p>Opens every PRG vote page.</p>
+
+  <p>⚠️ This does NOT automatically vote for you — it simply opens all links in one place.</p>
+
+  <div class="note-highlight">
+    📱 iPhone users: Open this page in Safari for best results (not Discord or other apps).
   </div>
 
-  <div class="note-section">
-    <span class="note-title">⚠️ Important</span>
-    This does NOT automatically vote for you — it simply opens all links in one place.
-  </div>
+  <p>💡 Tip: If you're signed into the Steam app on your phone, voting is quick and easy 👍</p>
 
-  <div class="note-section">
-    <span class="note-title">📱 iPhone</span>
-    Open this page in Safari for best results, not Discord or other in-app browsers.
-  </div>
+  <p>If multiple tabs don’t open, use the individual game buttons instead.</p>
 
-  <div class="note-section">
-    <span class="note-title">💡 Tip</span>
-    If you're signed into the Steam app on your phone, voting is quick and easy 👍
-  </div>
-
-  <div class="note-section">
-    If multiple tabs don’t open, use the individual game buttons instead.
-  </div>
-
-  <div class="note-section">
-    Thank you for supporting PRG! ❤️
-  </div>
+  <p>Thank you for supporting PRG! ❤️</p>
 </div>
 
 <div id="iphoneWarning" class="warning hidden">
