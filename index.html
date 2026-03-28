@@ -47,7 +47,7 @@ body {
   pointer-events: none;
 }
 
-/* 🔥 GLOWING DRAGON */
+/* GLOWING DRAGON */
 .hero-logo {
   width: 92px;
   margin-bottom: 10px;
@@ -81,7 +81,9 @@ h1 {
 }
 
 /* BUTTONS */
-.main-btn, .group-btn, .action-btn {
+.main-btn,
+.group-btn,
+.action-btn {
   width: 100%;
   padding: 13px;
   margin-bottom: 10px;
@@ -91,15 +93,31 @@ h1 {
   border: none;
   color: #fff;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.main-btn:hover,
+.group-btn:hover,
+.action-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.main-btn:active,
+.group-btn:active,
+.action-btn:active {
+  transform: scale(0.97);
 }
 
 .main-btn {
   background: linear-gradient(90deg, #a31212, #ff2f2f);
+  letter-spacing: 0.12em;
 }
 
 .group-btn {
   background: linear-gradient(90deg, #5c1010, #b32020);
   font-size: 12px;
+  letter-spacing: 0.1em;
 }
 
 .action-btn {
@@ -112,15 +130,26 @@ h1 {
   display: block;
   padding: 11px;
   margin-top: 6px;
-  background: #1a1a1a;
+  background: linear-gradient(180deg, #1a1a1a, #111);
   border-radius: 10px;
   text-align: center;
   text-decoration: none;
   color: #fff;
+  border: 1px solid #2f2f2f;
+  transition: all 0.15s ease;
+}
+
+.server-link:hover {
+  border-color: #a82929;
+  background: #201111;
+  transform: translateY(-1px);
 }
 
 /* BOXES */
-.note, .warning, .status, .helper-box {
+.note,
+.warning,
+.status,
+.helper-box {
   margin-top: 12px;
   padding: 12px;
   border-radius: 10px;
@@ -128,18 +157,86 @@ h1 {
   line-height: 1.6;
 }
 
-.note { background: #111; }
-
-.warning {
-  background: #2a1400;
-  color: #ffd9a3;
+.note {
+  background: linear-gradient(180deg, rgba(22,22,22,0.98), rgba(12,12,12,0.98));
+  border: 1px solid rgba(255, 60, 60, 0.14);
+  text-align: left;
 }
 
-.status { background: #111; }
+.note-section {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
 
-.helper-box { background: #161616; }
+.note-section:first-child {
+  padding-top: 0;
+}
+
+.note-section:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.note-title {
+  display: block;
+  font-weight: 800;
+  color: #ffb3b3;
+  margin-bottom: 3px;
+  letter-spacing: 0.02em;
+}
+
+.warning {
+  background: linear-gradient(180deg, #2a1400, #1d0f00);
+  color: #ffd9a3;
+  border: 1px solid rgba(255, 174, 0, 0.2);
+  text-align: left;
+}
+
+.status {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.helper-box {
+  background: #161616;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: left;
+}
 
 .hidden { display: none; }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px;
+  }
+
+  .card {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .hero-logo {
+    width: 84px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .main-btn,
+  .group-btn,
+  .action-btn,
+  .server-link {
+    font-size: 12px;
+  }
+
+  .note,
+  .warning,
+  .status,
+  .helper-box {
+    font-size: 12px;
+  }
+}
 </style>
 </head>
 
@@ -157,13 +254,35 @@ OPEN ALL VOTES
 </button>
 
 <div class="note">
-Opens every PRG vote page. Some mobile browsers may block multiple tabs — use the individual game buttons if needed.<br><br>
-⚠️ This does NOT automatically vote for you — it simply opens all links in one place.<br><br>
-💡 Tip: If you're signed into the Steam app on your phone, voting is quick and easy 👍<br><br>
-Thank you for supporting PRG! ❤️
+  <div class="note-section">
+    <span class="note-title">Quick Access</span>
+    Opens every PRG vote page.
+  </div>
+
+  <div class="note-section">
+    <span class="note-title">⚠️ Important</span>
+    This does NOT automatically vote for you — it simply opens all links in one place.
+  </div>
+
+  <div class="note-section">
+    <span class="note-title">📱 iPhone</span>
+    Open this page in Safari for best results, not Discord or other in-app browsers.
+  </div>
+
+  <div class="note-section">
+    <span class="note-title">💡 Tip</span>
+    If you're signed into the Steam app on your phone, voting is quick and easy 👍
+  </div>
+
+  <div class="note-section">
+    If multiple tabs don’t open, use the individual game buttons instead.
+  </div>
+
+  <div class="note-section">
+    Thank you for supporting PRG! ❤️
+  </div>
 </div>
 
-<!-- ALWAYS SHOW ON IPHONE -->
 <div id="iphoneWarning" class="warning hidden">
 <strong>iPhone Users</strong><br>
 For best results, use this page in <strong>Safari</strong>.<br>
@@ -182,88 +301,89 @@ Then use <strong>OPEN ALL VOTES</strong>.
 
 <div class="card">
 <button class="group-btn" onclick="handleOpen(links7d2d)">OPEN ALL 7DTD</button>
-<a class="server-link" href="https://7daystodie-servers.com/server/90387/" target="_blank">X</a>
-<a class="server-link" href="https://7daystodie-servers.com/server/90388/" target="_blank">XL</a>
-<a class="server-link" href="https://7daystodie-servers.com/server/90386/" target="_blank">SH</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90387/" target="_blank" rel="noopener noreferrer">X</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90388/" target="_blank" rel="noopener noreferrer">XL</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90386/" target="_blank" rel="noopener noreferrer">SH</a>
 </div>
 
 <div class="card">
 <button class="group-btn" onclick="handleOpen(linksConan)">OPEN ALL CONAN</button>
-<a class="server-link" href="https://conan-exiles.com/server/90870/" target="_blank">EL</a>
-<a class="server-link" href="https://conan-exiles.com/server/90985/" target="_blank">SEB</a>
+<a class="server-link" href="https://conan-exiles.com/server/90870/" target="_blank" rel="noopener noreferrer">EL</a>
+<a class="server-link" href="https://conan-exiles.com/server/90985/" target="_blank" rel="noopener noreferrer">SEB</a>
 </div>
 
 <div class="card">
 <button class="group-btn" onclick="handleOpen(linksEmpyrion)">OPEN ALL EMPYRION</button>
-<a class="server-link" href="https://empyrion-servers.com/server/65230/" target="_blank">Empyrion</a>
+<a class="server-link" href="https://empyrion-servers.com/server/65230/" target="_blank" rel="noopener noreferrer">Empyrion</a>
 </div>
 
 <div class="card">
 <button class="group-btn" onclick="handleOpen(linksArk)">OPEN ALL ARK</button>
-<a class="server-link" href="https://ark-servers.net/server/331423/" target="_blank">Rag</a>
-<a class="server-link" href="https://ark-servers.net/server/330408/" target="_blank">Fjordur</a>
-<a class="server-link" href="https://ark-servers.net/server/330422/" target="_blank">Gen2</a>
+<a class="server-link" href="https://ark-servers.net/server/331423/" target="_blank" rel="noopener noreferrer">Rag</a>
+<a class="server-link" href="https://ark-servers.net/server/330408/" target="_blank" rel="noopener noreferrer">Fjordur</a>
+<a class="server-link" href="https://ark-servers.net/server/330422/" target="_blank" rel="noopener noreferrer">Gen2</a>
 </div>
 
 </div>
 
 <script>
 const links7d2d = [
-"https://7daystodie-servers.com/server/90387/",
-"https://7daystodie-servers.com/server/90388/",
-"https://7daystodie-servers.com/server/90386/"
+  "https://7daystodie-servers.com/server/90387/",
+  "https://7daystodie-servers.com/server/90388/",
+  "https://7daystodie-servers.com/server/90386/"
 ];
 
 const linksConan = [
-"https://conan-exiles.com/server/90870/",
-"https://conan-exiles.com/server/90985/"
+  "https://conan-exiles.com/server/90870/",
+  "https://conan-exiles.com/server/90985/"
 ];
 
 const linksEmpyrion = [
-"https://empyrion-servers.com/server/65230/"
+  "https://empyrion-servers.com/server/65230/"
 ];
 
 const linksArk = [
-"https://ark-servers.net/server/331423/",
-"https://ark-servers.net/server/330408/",
-"https://ark-servers.net/server/330422/"
+  "https://ark-servers.net/server/331423/",
+  "https://ark-servers.net/server/330408/",
+  "https://ark-servers.net/server/330422/"
 ];
 
 const allLinks = [...links7d2d, ...linksConan, ...linksEmpyrion, ...linksArk];
 
 function isIphone() {
-return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
 // SHOW WARNING ON ALL IPHONES
 if (isIphone()) {
-document.getElementById("iphoneWarning").classList.remove("hidden");
+  document.getElementById("iphoneWarning").classList.remove("hidden");
 }
 
 function handleOpen(links) {
-const status = document.getElementById("status");
-status.classList.remove("hidden");
-status.innerText = "Opening links...";
+  const status = document.getElementById("status");
+  status.classList.remove("hidden");
+  status.innerText = "Opening links...";
 
-links.forEach((url, i) => {
-setTimeout(() => {
-const a = document.createElement("a");
-a.href = url;
-a.target = "_blank";
-document.body.appendChild(a);
-a.click();
-a.remove();
-}, i * 400);
-});
+  links.forEach((url, i) => {
+    setTimeout(() => {
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }, i * 400);
+  });
 }
 
 function openInSafari() {
-const helper = document.getElementById("helperBox");
-helper.classList.remove("hidden");
-helper.innerHTML = `
+  const helper = document.getElementById("helperBox");
+  helper.classList.remove("hidden");
+  helper.innerHTML = `
 Tap your app’s <strong>Share</strong> button and choose <strong>Open in Safari</strong>.<br><br>
 Or copy this link:<br><br>
-<a href="${window.location.href}" style="color:#ffb3b3;">${window.location.href}</a>
+<a href="${window.location.href}" style="color:#ffb3b3; word-break: break-all;">${window.location.href}</a>
 `;
 }
 </script>
