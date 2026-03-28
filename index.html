@@ -5,58 +5,211 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRG Mobile Vote Hub</title>
 
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#8b0000">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-
 <style>
-body{margin:0;font-family:Arial;background:#050505;color:#fff}
-.container{max-width:650px;margin:auto;padding:10px}
-.card{background:#111;border:1px solid #333;border-radius:14px;padding:14px;margin-bottom:10px}
-button{width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:none;background:#a31212;color:#fff;font-weight:bold}
-a{display:block;padding:10px;margin-top:6px;background:#1a1a1a;border-radius:10px;text-align:center;color:#fff;text-decoration:none}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top center, rgba(200,0,0,0.2), transparent 30%),
+    linear-gradient(180deg, #111 0%, #050505 100%);
+  color: #fff;
+}
+
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 10px;
+}
+
+.card {
+  background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  border: 1px solid #5a1a1a;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top center, rgba(255, 0, 0, 0.12), transparent 45%);
+  pointer-events: none;
+}
+
+/* 🔥 GLOWING DRAGON */
+.hero-logo {
+  width: 92px;
+  margin-bottom: 10px;
+  animation: dragonGlow 2.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes dragonGlow {
+  0% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 0 4px rgba(255, 0, 0, 0.35))
+      drop-shadow(0 0 10px rgba(255, 0, 0, 0.25))
+      drop-shadow(0 0 18px rgba(255, 40, 40, 0.18));
+    opacity: 0.95;
+  }
+
+  50% {
+    transform: scale(1.04);
+    filter:
+      drop-shadow(0 0 8px rgba(255, 0, 0, 0.65))
+      drop-shadow(0 0 18px rgba(255, 20, 20, 0.45))
+      drop-shadow(0 0 30px rgba(255, 60, 60, 0.28));
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 0 4px rgba(255, 0, 0, 0.35))
+      drop-shadow(0 0 10px rgba(255, 0, 0, 0.25))
+      drop-shadow(0 0 18px rgba(255, 40, 40, 0.18));
+    opacity: 0.95;
+  }
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+/* BUTTONS */
+.main-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  background: linear-gradient(90deg, #a31212, #ff2f2f);
+  border-radius: 16px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+.group-btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #5c1010, #b32020);
+  border-radius: 12px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* LINKS */
+.server-link {
+  display: block;
+  padding: 12px;
+  margin-top: 6px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* TEXT BOXES */
+.note, .status, .warning {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.note {
+  background: #111;
+}
+
+.status {
+  background: #111;
+}
+
+.warning {
+  background: #2a1400;
+  color: #ffd9a3;
+}
+
+.hidden {
+  display: none;
+}
 </style>
 </head>
 
 <body>
 <div class="container">
 
-<div class="card">
-<h2>PRG Mobile Vote Hub</h2>
+<div class="card hero">
+<img src="dragon.png" class="hero-logo" alt="PRG Dragon Emblem">
 
-<button onclick="openGroup(allLinks)">OPEN ALL VOTES</button>
+<h1>PRG Mobile Vote Hub</h1>
 
-<p>
+<button class="main-btn" onclick="handleOpen(allLinks, 'All Votes')">
+OPEN ALL VOTES
+</button>
+
+<div class="note">
 Opens every PRG vote page. Some mobile browsers may block multiple tabs — use the individual game buttons if needed.<br><br>
 ⚠️ This does NOT automatically vote for you — it simply opens all links in one place.<br><br>
 💡 Tip: If you're signed into the Steam app on your phone, voting is quick and easy 👍<br><br>
 Thank you for supporting PRG! ❤️
-</p>
+</div>
+
+<div id="warning" class="warning hidden">
+Installed app mode detected — for best results use your browser instead of the home screen app.
+</div>
+
+<div id="status" class="status hidden"></div>
+</div>
+
+<!-- SECTIONS -->
+
+<div class="card">
+<button class="group-btn" onclick="handleOpen(links7d2d,'7DTD')">OPEN ALL 7DTD</button>
+<a class="server-link" href="https://7daystodie-servers.com/server/90387/" target="_blank">X</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90388/" target="_blank">XL</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90386/" target="_blank">SH</a>
 </div>
 
 <div class="card">
-<button onclick="openGroup(links7d2d)">OPEN ALL 7DTD</button>
-<a href="https://7daystodie-servers.com/server/90387/" target="_blank">X</a>
-<a href="https://7daystodie-servers.com/server/90388/" target="_blank">XL</a>
-<a href="https://7daystodie-servers.com/server/90386/" target="_blank">SH</a>
+<button class="group-btn" onclick="handleOpen(linksConan,'Conan')">OPEN ALL CONAN</button>
+<a class="server-link" href="https://conan-exiles.com/server/90870/" target="_blank">EL</a>
+<a class="server-link" href="https://conan-exiles.com/server/90985/" target="_blank">SEB</a>
 </div>
 
 <div class="card">
-<button onclick="openGroup(linksConan)">OPEN ALL CONAN</button>
-<a href="https://conan-exiles.com/server/90870/" target="_blank">EL</a>
-<a href="https://conan-exiles.com/server/90985/" target="_blank">SEB</a>
+<button class="group-btn" onclick="handleOpen(linksEmpyrion,'Empyrion')">OPEN ALL EMPYRION</button>
+<a class="server-link" href="https://empyrion-servers.com/server/65230/" target="_blank">Empyrion</a>
 </div>
 
 <div class="card">
-<button onclick="openGroup(linksEmpyrion)">OPEN ALL EMPYRION</button>
-<a href="https://empyrion-servers.com/server/65230/" target="_blank">Empyrion</a>
-</div>
-
-<div class="card">
-<button onclick="openGroup(linksArk)">OPEN ALL ARK</button>
-<a href="https://ark-servers.net/server/331423/" target="_blank">Rag</a>
-<a href="https://ark-servers.net/server/330408/" target="_blank">Fjordur</a>
-<a href="https://ark-servers.net/server/330422/" target="_blank">Gen2</a>
+<button class="group-btn" onclick="handleOpen(linksArk,'Ark')">OPEN ALL ARK</button>
+<a class="server-link" href="https://ark-servers.net/server/331423/" target="_blank">Rag</a>
+<a class="server-link" href="https://ark-servers.net/server/330408/" target="_blank">Fjordur</a>
+<a class="server-link" href="https://ark-servers.net/server/330422/" target="_blank">Gen2</a>
 </div>
 
 </div>
@@ -85,14 +238,43 @@ const linksArk=[
 
 const allLinks=[...links7d2d,...linksConan,...linksEmpyrion,...linksArk];
 
-function openGroup(group){
-group.forEach((url,i)=>{
-setTimeout(()=>window.open(url,"_blank"),i*400);
+function isStandalone(){
+return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+}
+
+function handleOpen(links,label){
+const status=document.getElementById("status");
+status.classList.remove("hidden");
+
+if(isStandalone()){
+document.getElementById("warning").classList.remove("hidden");
+status.innerText="App mode: opening one-by-one...";
+openOneByOne(links);
+return;
+}
+
+status.innerText="Trying to open multiple tabs...";
+
+links.forEach((url,i)=>{
+setTimeout(()=>{
+const a=document.createElement("a");
+a.href=url;
+a.target="_blank";
+document.body.appendChild(a);
+a.click();
+a.remove();
+},i*400);
 });
 }
 
-if("serviceWorker" in navigator){
-navigator.serviceWorker.register("sw.js");
+function openOneByOne(links){
+let i=0;
+function next(){
+if(i>=links.length)return;
+window.open(links[i],"_blank");
+i++;
+}
+next();
 }
 </script>
 
