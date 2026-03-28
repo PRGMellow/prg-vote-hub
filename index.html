@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRG Mobile Vote Hub</title>
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#8b0000">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<style>
+body{margin:0;font-family:Arial;background:#050505;color:#fff}
+.container{max-width:650px;margin:auto;padding:10px}
+.card{background:#111;border:1px solid #333;border-radius:14px;padding:14px;margin-bottom:10px}
+button{width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:none;background:#a31212;color:#fff;font-weight:bold}
+a{display:block;padding:10px;margin-top:6px;background:#1a1a1a;border-radius:10px;text-align:center;color:#fff;text-decoration:none}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="card">
+<h2>PRG Mobile Vote Hub</h2>
+
+<button onclick="openGroup(allLinks)">OPEN ALL VOTES</button>
+
+<p>
+Opens every PRG vote page. Some mobile browsers may block multiple tabs — use the individual game buttons if needed.<br><br>
+⚠️ This does NOT automatically vote for you — it simply opens all links in one place.<br><br>
+💡 Tip: If you're signed into the Steam app on your phone, voting is quick and easy 👍<br><br>
+Thank you for supporting PRG! ❤️
+</p>
+</div>
+
+<div class="card">
+<button onclick="openGroup(links7d2d)">OPEN ALL 7DTD</button>
+<a href="https://7daystodie-servers.com/server/90387/" target="_blank">X</a>
+<a href="https://7daystodie-servers.com/server/90388/" target="_blank">XL</a>
+<a href="https://7daystodie-servers.com/server/90386/" target="_blank">SH</a>
+</div>
+
+<div class="card">
+<button onclick="openGroup(linksConan)">OPEN ALL CONAN</button>
+<a href="https://conan-exiles.com/server/90870/" target="_blank">EL</a>
+<a href="https://conan-exiles.com/server/90985/" target="_blank">SEB</a>
+</div>
+
+<div class="card">
+<button onclick="openGroup(linksEmpyrion)">OPEN ALL EMPYRION</button>
+<a href="https://empyrion-servers.com/server/65230/" target="_blank">Empyrion</a>
+</div>
+
+<div class="card">
+<button onclick="openGroup(linksArk)">OPEN ALL ARK</button>
+<a href="https://ark-servers.net/server/331423/" target="_blank">Rag</a>
+<a href="https://ark-servers.net/server/330408/" target="_blank">Fjordur</a>
+<a href="https://ark-servers.net/server/330422/" target="_blank">Gen2</a>
+</div>
+
+</div>
+
+<script>
+const links7d2d=[
+"https://7daystodie-servers.com/server/90387/",
+"https://7daystodie-servers.com/server/90388/",
+"https://7daystodie-servers.com/server/90386/"
+];
+
+const linksConan=[
+"https://conan-exiles.com/server/90870/",
+"https://conan-exiles.com/server/90985/"
+];
+
+const linksEmpyrion=[
+"https://empyrion-servers.com/server/65230/"
+];
+
+const linksArk=[
+"https://ark-servers.net/server/331423/",
+"https://ark-servers.net/server/330408/",
+"https://ark-servers.net/server/330422/"
+];
+
+const allLinks=[...links7d2d,...linksConan,...linksEmpyrion,...linksArk];
+
+function openGroup(group){
+group.forEach((url,i)=>{
+setTimeout(()=>window.open(url,"_blank"),i*400);
+});
+}
+
+if("serviceWorker" in navigator){
+navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
