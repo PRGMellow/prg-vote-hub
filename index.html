@@ -1,390 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PRG Mobile Vote Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRG Mobile Vote Hub</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top center, rgba(200,0,0,0.2), transparent 30%),
-        linear-gradient(180deg, #111 0%, #050505 100%);
-      color: #fff;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top center, rgba(200,0,0,0.2), transparent 30%),
+    linear-gradient(180deg, #111 0%, #050505 100%);
+  color: #fff;
+}
 
-    .container {
-      max-width: 650px;
-      margin: auto;
-      padding: 10px;
-    }
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 10px;
+}
 
-    .card {
-      background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
-      border: 1px solid #3a3a3a;
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 10px;
-    }
+.card {
+  background: linear-gradient(180deg, #1b1b1b, #0a0a0a);
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
 
-    .hero {
-      text-align: center;
-      border: 1px solid #5a1a1a;
-      position: relative;
-      overflow: hidden;
-    }
+/* HERO */
+.hero {
+  text-align: center;
+  border: 1px solid #5a1a1a;
+  position: relative;
+  overflow: hidden;
+}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top center, rgba(255, 0, 0, 0.12), transparent 45%);
-      pointer-events: none;
-    }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top center, rgba(255, 0, 0, 0.12), transparent 45%);
+  pointer-events: none;
+}
 
-    .hero-logo {
-      width: 92px;
-      margin-bottom: 10px;
-      animation: dragonGlow 2.8s ease-in-out infinite;
-      transform-origin: center;
-      position: relative;
-      z-index: 1;
-    }
+/* 🔥 GLOWING DRAGON */
+.hero-logo {
+  width: 92px;
+  margin-bottom: 10px;
+  animation: dragonGlow 2.8s ease-in-out infinite;
+}
 
-    @keyframes dragonGlow {
-      0% {
-        transform: scale(1);
-        filter:
-          drop-shadow(0 0 4px rgba(255, 0, 0, 0.35))
-          drop-shadow(0 0 10px rgba(255, 0, 0, 0.25))
-          drop-shadow(0 0 18px rgba(255, 40, 40, 0.18));
-        opacity: 0.95;
-      }
-      50% {
-        transform: scale(1.04);
-        filter:
-          drop-shadow(0 0 8px rgba(255, 0, 0, 0.65))
-          drop-shadow(0 0 18px rgba(255, 20, 20, 0.45))
-          drop-shadow(0 0 30px rgba(255, 60, 60, 0.28));
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        filter:
-          drop-shadow(0 0 4px rgba(255, 0, 0, 0.35))
-          drop-shadow(0 0 10px rgba(255, 0, 0, 0.25))
-          drop-shadow(0 0 18px rgba(255, 40, 40, 0.18));
-        opacity: 0.95;
-      }
-    }
+@keyframes dragonGlow {
+  0% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 0 4px rgba(255,0,0,0.35))
+      drop-shadow(0 0 10px rgba(255,0,0,0.25));
+  }
+  50% {
+    transform: scale(1.05);
+    filter:
+      drop-shadow(0 0 10px rgba(255,0,0,0.7))
+      drop-shadow(0 0 25px rgba(255,0,0,0.4));
+  }
+  100% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 0 4px rgba(255,0,0,0.35))
+      drop-shadow(0 0 10px rgba(255,0,0,0.25));
+  }
+}
 
-    h1 {
-      font-size: 22px;
-      margin: 0 0 12px;
-      position: relative;
-      z-index: 1;
-    }
+h1 {
+  font-size: 22px;
+  margin: 0 0 12px;
+}
 
-    .main-btn,
-    .group-btn,
-    .action-btn {
-      width: 100%;
-      padding: 13px;
-      margin-bottom: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 12px;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      position: relative;
-      z-index: 1;
-    }
+/* BUTTONS */
+.main-btn, .group-btn, .action-btn {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 12px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
 
-    .main-btn {
-      background: linear-gradient(90deg, #a31212, #ff2f2f);
-      font-size: 13px;
-      letter-spacing: 0.14em;
-    }
+.main-btn {
+  background: linear-gradient(90deg, #a31212, #ff2f2f);
+}
 
-    .group-btn {
-      background: linear-gradient(90deg, #5c1010, #b32020);
-      font-size: 12px;
-      letter-spacing: 0.12em;
-    }
+.group-btn {
+  background: linear-gradient(90deg, #5c1010, #b32020);
+  font-size: 12px;
+}
 
-    .action-btn {
-      background: linear-gradient(90deg, #7a4a00, #d18800);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-    }
+.action-btn {
+  background: linear-gradient(90deg, #7a4a00, #d18800);
+  font-size: 12px;
+}
 
-    .main-btn:active,
-    .group-btn:active,
-    .action-btn:active,
-    .server-link:active {
-      transform: scale(0.97);
-    }
+/* LINKS */
+.server-link {
+  display: block;
+  padding: 11px;
+  margin-top: 6px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}
 
-    .server-link {
-      display: block;
-      padding: 11px;
-      margin-top: 6px;
-      background: #1a1a1a;
-      border-radius: 10px;
-      text-align: center;
-      text-decoration: none;
-      color: #fff;
-      transition: all 0.15s ease;
-    }
+/* BOXES */
+.note, .warning, .status, .helper-box {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
 
-    .server-link:hover {
-      background: #241010;
-    }
+.note { background: #111; }
 
-    .note,
-    .warning,
-    .status,
-    .helper-box {
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
+.warning {
+  background: #2a1400;
+  color: #ffd9a3;
+}
 
-    .note {
-      background: #111;
-      color: #e0e0e0;
-    }
+.status { background: #111; }
 
-    .warning {
-      background: #2a1400;
-      color: #ffd9a3;
-      text-align: left;
-    }
+.helper-box { background: #161616; }
 
-    .status {
-      background: #111;
-      color: #ddd;
-      text-align: left;
-    }
-
-    .helper-box {
-      background: #161616;
-      color: #ddd;
-      text-align: left;
-    }
-
-    .helper-link {
-      display: block;
-      word-break: break-all;
-      color: #ffb3b3;
-      text-decoration: none;
-      margin-top: 8px;
-      font-size: 12px;
-    }
-
-    .helper-link:hover {
-      text-decoration: underline;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 480px) {
-      .main-btn,
-      .group-btn,
-      .action-btn,
-      .server-link {
-        font-size: 12px;
-      }
-
-      .note,
-      .warning,
-      .status,
-      .helper-box {
-        font-size: 12px;
-      }
-    }
-  </style>
+.hidden { display: none; }
+</style>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
 
-    <div class="card hero">
-      <img src="dragon.png" class="hero-logo" alt="PRG Dragon Emblem" />
+<div class="card hero">
 
-      <h1>PRG Mobile Vote Hub</h1>
+<img src="dragon.png" class="hero-logo" alt="PRG Dragon Emblem">
 
-      <button class="main-btn" onclick="handleOpen(allLinks, 'All Votes')">
-        OPEN ALL VOTES
-      </button>
+<h1>PRG Mobile Vote Hub</h1>
 
-      <div class="note">
-        Opens every PRG vote page. Some mobile browsers may block multiple tabs — use the individual game buttons if needed.<br><br>
-        ⚠️ This does NOT automatically vote for you — it simply opens all links in one place.<br><br>
-        💡 Tip: If you're signed into the Steam app on your phone, voting is quick and easy 👍<br><br>
-        Thank you for supporting PRG! ❤️
-      </div>
+<button class="main-btn" onclick="handleOpen(allLinks)">
+OPEN ALL VOTES
+</button>
 
-      <div id="iphoneWarning" class="warning hidden">
-        <strong>iPhone In-App Browser Detected</strong><br>
-        For best results, open this page in Safari first. Then use <strong>OPEN ALL VOTES</strong> again.<br><br>
-        Tap the button below, or use your app’s share/options menu and choose <strong>Open in Safari</strong>.
-        <button class="action-btn" onclick="openInSafari()">
-          OPEN IN SAFARI
-        </button>
-      </div>
+<div class="note">
+Opens every PRG vote page. Some mobile browsers may block multiple tabs — use the individual game buttons if needed.<br><br>
+⚠️ This does NOT automatically vote for you — it simply opens all links in one place.<br><br>
+💡 Tip: If you're signed into the Steam app on your phone, voting is quick and easy 👍<br><br>
+Thank you for supporting PRG! ❤️
+</div>
 
-      <div id="helperBox" class="helper-box hidden">
-        <strong>Safari Tip</strong><br>
-        If the button above does not switch apps automatically, copy or tap this link in Safari:
-        <a id="pageLink" class="helper-link" href="#"></a>
-      </div>
+<!-- ALWAYS SHOW ON IPHONE -->
+<div id="iphoneWarning" class="warning hidden">
+<strong>iPhone Users</strong><br>
+For best results, use this page in <strong>Safari</strong>.<br>
+If you opened it from Discord, Facebook, or another app, tap Share → <strong>Open in Safari</strong> first.<br><br>
+Then use <strong>OPEN ALL VOTES</strong>.
+<button class="action-btn" onclick="openInSafari()">OPEN IN SAFARI</button>
+</div>
 
-      <div id="status" class="status hidden"></div>
-    </div>
+<div id="helperBox" class="helper-box hidden"></div>
 
-    <div class="card">
-      <button class="group-btn" onclick="handleOpen(links7d2d, '7DTD')">OPEN ALL 7DTD</button>
-      <a class="server-link" href="https://7daystodie-servers.com/server/90387/" target="_blank" rel="noopener noreferrer">X</a>
-      <a class="server-link" href="https://7daystodie-servers.com/server/90388/" target="_blank" rel="noopener noreferrer">XL</a>
-      <a class="server-link" href="https://7daystodie-servers.com/server/90386/" target="_blank" rel="noopener noreferrer">SH</a>
-    </div>
+<div id="status" class="status hidden"></div>
 
-    <div class="card">
-      <button class="group-btn" onclick="handleOpen(linksConan, 'Conan')">OPEN ALL CONAN</button>
-      <a class="server-link" href="https://conan-exiles.com/server/90870/" target="_blank" rel="noopener noreferrer">EL</a>
-      <a class="server-link" href="https://conan-exiles.com/server/90985/" target="_blank" rel="noopener noreferrer">SEB</a>
-    </div>
+</div>
 
-    <div class="card">
-      <button class="group-btn" onclick="handleOpen(linksEmpyrion, 'Empyrion')">OPEN ALL EMPYRION</button>
-      <a class="server-link" href="https://empyrion-servers.com/server/65230/" target="_blank" rel="noopener noreferrer">Empyrion</a>
-    </div>
+<!-- SECTIONS -->
 
-    <div class="card">
-      <button class="group-btn" onclick="handleOpen(linksArk, 'Ark')">OPEN ALL ARK</button>
-      <a class="server-link" href="https://ark-servers.net/server/331423/" target="_blank" rel="noopener noreferrer">Rag</a>
-      <a class="server-link" href="https://ark-servers.net/server/330408/" target="_blank" rel="noopener noreferrer">Fjordur</a>
-      <a class="server-link" href="https://ark-servers.net/server/330422/" target="_blank" rel="noopener noreferrer">Gen2</a>
-    </div>
+<div class="card">
+<button class="group-btn" onclick="handleOpen(links7d2d)">OPEN ALL 7DTD</button>
+<a class="server-link" href="https://7daystodie-servers.com/server/90387/" target="_blank">X</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90388/" target="_blank">XL</a>
+<a class="server-link" href="https://7daystodie-servers.com/server/90386/" target="_blank">SH</a>
+</div>
 
-  </div>
+<div class="card">
+<button class="group-btn" onclick="handleOpen(linksConan)">OPEN ALL CONAN</button>
+<a class="server-link" href="https://conan-exiles.com/server/90870/" target="_blank">EL</a>
+<a class="server-link" href="https://conan-exiles.com/server/90985/" target="_blank">SEB</a>
+</div>
 
-  <script>
-    const links7d2d = [
-      "https://7daystodie-servers.com/server/90387/",
-      "https://7daystodie-servers.com/server/90388/",
-      "https://7daystodie-servers.com/server/90386/"
-    ];
+<div class="card">
+<button class="group-btn" onclick="handleOpen(linksEmpyrion)">OPEN ALL EMPYRION</button>
+<a class="server-link" href="https://empyrion-servers.com/server/65230/" target="_blank">Empyrion</a>
+</div>
 
-    const linksConan = [
-      "https://conan-exiles.com/server/90870/",
-      "https://conan-exiles.com/server/90985/"
-    ];
+<div class="card">
+<button class="group-btn" onclick="handleOpen(linksArk)">OPEN ALL ARK</button>
+<a class="server-link" href="https://ark-servers.net/server/331423/" target="_blank">Rag</a>
+<a class="server-link" href="https://ark-servers.net/server/330408/" target="_blank">Fjordur</a>
+<a class="server-link" href="https://ark-servers.net/server/330422/" target="_blank">Gen2</a>
+</div>
 
-    const linksEmpyrion = [
-      "https://empyrion-servers.com/server/65230/"
-    ];
+</div>
 
-    const linksArk = [
-      "https://ark-servers.net/server/331423/",
-      "https://ark-servers.net/server/330408/",
-      "https://ark-servers.net/server/330422/"
-    ];
+<script>
+const links7d2d = [
+"https://7daystodie-servers.com/server/90387/",
+"https://7daystodie-servers.com/server/90388/",
+"https://7daystodie-servers.com/server/90386/"
+];
 
-    const allLinks = [
-      ...links7d2d,
-      ...linksConan,
-      ...linksEmpyrion,
-      ...linksArk
-    ];
+const linksConan = [
+"https://conan-exiles.com/server/90870/",
+"https://conan-exiles.com/server/90985/"
+];
 
-    function isIphone() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
+const linksEmpyrion = [
+"https://empyrion-servers.com/server/65230/"
+];
 
-    function isInAppBrowser() {
-      const ua = navigator.userAgent || "";
-      return ua.includes("Discord") ||
-             ua.includes("FBAN") ||
-             ua.includes("FBAV") ||
-             ua.includes("Instagram") ||
-             ua.includes("Line") ||
-             ua.includes("Twitter");
-    }
+const linksArk = [
+"https://ark-servers.net/server/331423/",
+"https://ark-servers.net/server/330408/",
+"https://ark-servers.net/server/330422/"
+];
 
-    function showStatus(message) {
-      const status = document.getElementById("status");
-      status.classList.remove("hidden");
-      status.innerText = message;
-    }
+const allLinks = [...links7d2d, ...linksConan, ...linksEmpyrion, ...linksArk];
 
-    function setPageLink() {
-      const link = document.getElementById("pageLink");
-      link.href = window.location.href;
-      link.textContent = window.location.href;
-    }
+function isIphone() {
+return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
 
-    function openInSafari() {
-      setPageLink();
+// SHOW WARNING ON ALL IPHONES
+if (isIphone()) {
+document.getElementById("iphoneWarning").classList.remove("hidden");
+}
 
-      const helperBox = document.getElementById("helperBox");
-      helperBox.classList.remove("hidden");
+function handleOpen(links) {
+const status = document.getElementById("status");
+status.classList.remove("hidden");
+status.innerText = "Opening links...";
 
-      showStatus("Trying to help you switch to Safari. If nothing changes, use your app’s Share / Open in Safari option.");
+links.forEach((url, i) => {
+setTimeout(() => {
+const a = document.createElement("a");
+a.href = url;
+a.target = "_blank";
+document.body.appendChild(a);
+a.click();
+a.remove();
+}, i * 400);
+});
+}
 
-      // Best-effort attempt. iOS often ignores forced app switching from in-app browsers.
-      window.location.href = window.location.href;
-    }
+function openInSafari() {
+const helper = document.getElementById("helperBox");
+helper.classList.remove("hidden");
+helper.innerHTML = `
+Tap your app’s <strong>Share</strong> button and choose <strong>Open in Safari</strong>.<br><br>
+Or copy this link:<br><br>
+<a href="${window.location.href}" style="color:#ffb3b3;">${window.location.href}</a>
+`;
+}
+</script>
 
-    function handleOpen(links, label) {
-      const iphoneWarning = document.getElementById("iphoneWarning");
-
-      if (isIphone() && isInAppBrowser()) {
-        iphoneWarning.classList.remove("hidden");
-        setPageLink();
-        showStatus("You’re in an iPhone in-app browser. Open this page in Safari first for the best results.");
-        return;
-      }
-
-      iphoneWarning.classList.add("hidden");
-      showStatus(`Opening ${label}...`);
-
-      links.forEach((url, i) => {
-        setTimeout(() => {
-          const a = document.createElement("a");
-          a.href = url;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-
-          if (i === links.length - 1) {
-            setTimeout(() => {
-              showStatus(`Finished trying to open ${label}. If not all pages opened, use the game buttons or individual links below.`);
-            }, 500);
-          }
-        }, i * 400);
-      });
-    }
-
-    if (isIphone() && isInAppBrowser()) {
-      document.getElementById("iphoneWarning").classList.remove("hidden");
-      document.getElementById("helperBox").classList.remove("hidden");
-      setPageLink();
-    }
-  </script>
 </body>
 </html>
